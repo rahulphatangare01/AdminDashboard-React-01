@@ -5,7 +5,7 @@ import { ResponsiveLine } from '@nivo/line';
 import { token } from '../theme';
 import {useTheme} from '@mui/material';
 
-function LineChart() {
+function LineChart({isDashboard = false}) {
     const theme = useTheme();
   const colors = token(theme.palette.mode);
   return (
@@ -46,6 +46,7 @@ function LineChart() {
                 }
             }
         }}
+        colors={isDashboard ? {datum:'color'} : {scheme:'nivo'} }
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{
@@ -62,16 +63,18 @@ function LineChart() {
         axisBottom={{
             tickSize: 5,
             tickPadding: 5,
+           
             tickRotation: 0,
-            legend: 'transportation',
+            legend: isDashboard ? undefined : 'transportation',
             legendOffset: 36,
             legendPosition: 'middle'
         }}
         axisLeft={{
             tickSize: 5,
             tickPadding: 5,
+            tickValues:5,
             tickRotation: 0,
-            legend: 'count',
+            legend: isDashboard ? undefined :'count',
             legendOffset: -40,
             legendPosition: 'middle'
         }}
